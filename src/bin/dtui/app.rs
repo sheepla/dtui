@@ -204,14 +204,14 @@ pub async fn run_app<B: Backend>(
                             }
                         }
                     }
-                    KeyCode::Left => match app.working_area {
+                    KeyCode::Left | KeyCode::Char('h') => match app.working_area {
                         WorkingArea::Services => app.services.unselect(),
                         WorkingArea::Objects => app.objects.left(),
                         WorkingArea::MethodCallPopUp(ref mut popup) => {
                             popup.method_arg_vis[0].text_area.input(key);
                         }
                     },
-                    KeyCode::Down => match app.working_area {
+                    KeyCode::Down | KeyCode::Char('j') => match app.working_area {
                         WorkingArea::Services => app.services.next(),
                         WorkingArea::Objects => app.objects.down(),
                         WorkingArea::MethodCallPopUp(ref mut popup) => {
@@ -219,14 +219,14 @@ pub async fn run_app<B: Backend>(
                                 std::cmp::min(popup.selected + 1, popup.method_arg_vis.len());
                         }
                     },
-                    KeyCode::Up => match app.working_area {
+                    KeyCode::Up | KeyCode::Char('k') => match app.working_area {
                         WorkingArea::Services => app.services.previous(),
                         WorkingArea::Objects => app.objects.up(),
                         WorkingArea::MethodCallPopUp(ref mut popup) => {
                             popup.selected = popup.selected.saturating_sub(1);
                         }
                     },
-                    KeyCode::Right => match app.working_area {
+                    KeyCode::Right | KeyCode::Char('l') => match app.working_area {
                         WorkingArea::Services => {}
                         WorkingArea::Objects => app.objects.right(),
                         WorkingArea::MethodCallPopUp(ref mut popup) => {
